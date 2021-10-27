@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+{% if next %}
+<p>Iltimos Ro'yxatdan O'ting</p>
+{% endif %}
+
+
+
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-6 offset-3 mt-5 border border-info">
+            <form class="mt-2" method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                {% if form.non_field_errors %}
+    <ul class='form-errors text-danger'>
+        {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+  <div class="form-group" >
+    <label >Username</label>
+    {{ form.username }}
+  </div>
+  <div class="form-group">
+    {{ form.password.label }}
+    {{ form.password }}
+  </div>
+                <div class="form-group">
+                    <button class="btn btn-success mr-2" type="submit">Login</button>
+                    <input type="hidden" name="next" value="{{ next }}">
+                </div>
+
+
+</form>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+</body>
+</html>

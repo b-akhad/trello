@@ -1,0 +1,56 @@
+
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-3 mt-5 border border-info ">
+            <form method="post">
+                 {% csrf_token %}
+                {% if form.has_error %}
+                <small>
+                    {{ form.error_messages }}
+                </small>
+                {% endif %}
+  <div class="form-group">
+      <label for="phone">Phone</label><Br>
+      <input class="form-control" id="phone" name="phone" type="text">
+      <label for="">First name</label>
+      {{ form.first_name }}
+    <label for="exampleInputPassword1">Username</label><br>
+    {{ form.username }}
+      <small class="text-danger"></small>
+  </div>
+                <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    {{ form.email }}
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+                <div class="form-group">
+    <label for="exampleInputPassword1">Password</label><br>
+    {{ form.password1 | add_class:'form-control'  }}
+                    <label class="mt-1">Verify Password</label>
+    {{ form.password2 | add_class:'form-control' }}
+  </div>
+
+  <button type="submit" class="btn btn-primary mb-4 mt-2">Submit</button>
+</form>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+</body>
+</html>
