@@ -6,7 +6,6 @@ from django.forms import EmailInput
 
 
 
-
 class UserCreation(UserCreationForm):
     email = forms.EmailField(widget=EmailInput(attrs={'class': "form-control", "placeholder": "Email"}))
     first_name = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", "placeholder":"john"}))

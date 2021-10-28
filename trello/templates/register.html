@@ -14,7 +14,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-3 mt-5 border border-info ">
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                  {% csrf_token %}
                 {% if form.has_error %}
                 <small>
@@ -23,7 +23,8 @@
                 {% endif %}
   <div class="form-group">
       <label for="phone">Phone</label><Br>
-      <input class="form-control" id="phone" name="phone" type="text">
+      <input name="file" type="file" class="form-control" >
+
       <label for="">First name</label>
       {{ form.first_name }}
     <label for="exampleInputPassword1">Username</label><br>
@@ -41,6 +42,8 @@
                     <label class="mt-1">Verify Password</label>
     {{ form.password2 | add_class:'form-control' }}
   </div>
+            <script src='https://www.google.com/recaptcha/api.js'></script>
+    <div class="g-recaptcha" data-sitekey="6LdRSRYUAAAAAFCqQ1aZnYfRGJIlAUMX3qkUWlcF"></div>
 
   <button type="submit" class="btn btn-primary mb-4 mt-2">Submit</button>
 </form>

@@ -1,6 +1,6 @@
 import uuid
 
-from django.contrib.auth.models import AbstractUser, User
+from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
@@ -15,6 +15,11 @@ class Roles(models.Model):
     
 
 class Phone(models.Model):
-    phone_number = models.CharField(max_length=12, default="-1", null=True)
-    
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default=-1)
+    profile_picture = models.ImageField(upload_to=getpath, null=True)
+
+
+
+
+
 

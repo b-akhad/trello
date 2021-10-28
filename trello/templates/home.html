@@ -8,38 +8,59 @@
     <link rel="stylesheet" href="{% static 'bootcss/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<body>
+<body class="overflow-hidden">
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="#">Trello</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <a class="navbar-brand" href="#">Trello</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
 
 
-    </ul>
+        </ul>
+    </div>
+
     <form class="form-inline my-2 my-lg-0">
-      <a href="{% url 'login' %}" class="btn btn-secondary mr-2">Login</a>
-      <a href="{% url 'register' %}" class="btn btn-success my-2 my-sm-0" type="submit">SignUp</a>
-    </form>
+        {% if user.is_authenticated %}
+
+
+            <div class="dropdown">
+
+    <img id="dropdownMenuButton" style="border-radius: 50%" class="btn btn-secondary dropdown-toggle mr-5" width="60" height="60" src="{{ user.phone.profile_picture.url }}" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+
+           <p>{{ user.username }}</p>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="{% url 'profile' user.id %}">Profile</a>
+    <a href="{% url 'logout' %}" class="dropdown-item text-danger">LogOut</a>
   </div>
+</div>
+
+
+
+        {% else %}
+            <a href="{% url 'login' %}" class="btn btn-secondary mr-2">Login</a>
+            <a href="{% url 'register' %}" class="btn btn-success my-2 my-sm-0" type="submit">SignUp</a>
+        {% endif %}
+
+    </form>
+
 </nav>
 
-    <div class="container-fluid  pl-0 pr-0">
+
+<div class="container-fluid  pl-0 pr-0">
     <div class="background pt-5">
-         <h2  class="title text-center   text-white pt-5"><i class=""> <b class="">Join</b> Us</i></h2>
-        <div class="text-center   pt-button-div"><a href="{% url 'register' %}" class="title-button btn btn-primary text-white">SignUp</a></div>
-
+        <h2 class="title text-center   text-white pt-5"><i class=""> <b class="">Join</b> Us</i></h2>
+        <div class="text-center   pt-button-div"><a href="{% url 'register' %}"
+                                                    class="title-button btn btn-primary text-white">SignUp</a></div>
 
 
     </div>
 
-    </div>
-
-
-
+</div>
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

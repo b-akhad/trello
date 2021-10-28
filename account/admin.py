@@ -1,4 +1,4 @@
 from django.contrib import admin
-from trello.models import Roles
+from trello.models import Roles, Phone
 # Register your models here.
-admin.site.register(Roles)
+admin.site.register(Phone)
