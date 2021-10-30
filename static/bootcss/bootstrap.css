@@ -2919,12 +2919,12 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-success {
-  color: #28a745;
+  color: #28a745 !important;
   border-color: #28a745;
 }
 
 .btn-outline-success:hover {
-  color: #fff;
+  color: #fff !important;
   background-color: #28a745;
   border-color: #28a745;
 }
@@ -2934,7 +2934,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-success.disabled, .btn-outline-success:disabled {
-  color: #28a745;
+  color: #28a745 !important;
   background-color: transparent;
 }
 

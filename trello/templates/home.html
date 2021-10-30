@@ -4,6 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Title</title>
     <link rel="stylesheet" href="{% static 'bootcss/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -26,18 +27,17 @@
     <form class="form-inline my-2 my-lg-0">
         {% if user.is_authenticated %}
 
-
             <div class="dropdown">
+  <a class="btn btn-secondary dropdown-toggle mr-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{ user.username }}
+  </a>
 
-    <img id="dropdownMenuButton" style="border-radius: 50%" class="btn btn-secondary dropdown-toggle mr-5" width="60" height="60" src="{{ user.phone.profile_picture.url }}" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-
-           <p>{{ user.username }}</p>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <a class="dropdown-item" href="{% url 'profile' user.id %}">Profile</a>
     <a href="{% url 'logout' %}" class="dropdown-item text-danger">LogOut</a>
   </div>
 </div>
+<img style="border-radius: 50%" class="" width="60" height="60" src="{{ user.picture.profile_picture.url }}" alt="">
 
 
 
@@ -54,8 +54,16 @@
 <div class="container-fluid  pl-0 pr-0">
     <div class="background pt-5">
         <h2 class="title text-center   text-white pt-5"><i class=""> <b class="">Join</b> Us</i></h2>
-        <div class="text-center   pt-button-div"><a href="{% url 'register' %}"
-                                                    class="title-button btn btn-primary text-white">SignUp</a></div>
+        {% if user.is_authenticated %}
+            <div class="text-center   pt-button-div">
+            <a href="{% url 'dashboard' %}" class="title-button btn btn-primary text-white">Dashboard</a>
+        </div>
+
+            {% else %}
+        <div class="text-center   pt-button-div">
+            <a href="{% url 'register' %}" class="title-button btn btn-primary text-white">SignUp</a>
+        </div>
+        {% endif %}
 
 
     </div>

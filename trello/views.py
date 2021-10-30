@@ -11,13 +11,27 @@ from django.shortcuts import render, redirect
 
 from Trello import settings
 from account.forms import UserCreation
-from trello.models import Phone
+from trello.models import Picture, Org
 # Create your views here.
 
 
 def home(request):
     return render(request, 'home.html')
 
+
+def dashboard(request):
+    return render(request, "dashboard.html",)
+
+
+def create_organization(request):
+    user = User.objects.get(id=request.user.id)
+    if request.method == "POST":
+        org = Org()
+        org.name = request.POST.get("org_name")
+        org.user = user
+        org.save()
+        return redirect("dashboard")
+    return render(request, "create_organization.html")
 
 
 def registration(request):
@@ -36,10 +50,11 @@ def registration(request):
             result = r.json()
 
             user = form.save()
-            phone = Phone()
-            phone.profile_picture = request.FILES.get('file')
-            phone.user = user
-            phone.save()
+
+            picture = Picture()
+            picture.profile_picture = request.FILES.get('file')
+            picture.user = user
+            picture.save()
             login(request, user)
             return redirect('home')
     context = {"form": form}
