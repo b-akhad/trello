@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Title</title>
     <link rel="stylesheet" href="{% static 'bootcss/bootstrap.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body class="overflow-hidden">
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -56,14 +56,18 @@
         <h2 class="title text-center   text-white pt-5"><i class=""> <b class="">Join</b> Us</i></h2>
         {% if user.is_authenticated %}
             <div class="text-center   pt-button-div">
-            <a href="{% url 'dashboard' %}" class="title-button btn btn-primary text-white">Dashboard</a>
-        </div>
+                {% for o in user.org_set.all %}
+                    <a href="{% url 'dashboard' o.id  %}" class="title-button btn btn-primary text-white">
+                        {{ o.name }}
+                    </a>
+                {% endfor %}
+            </div>
 
             {% else %}
         <div class="text-center   pt-button-div">
             <a href="{% url 'register' %}" class="title-button btn btn-primary text-white">SignUp</a>
         </div>
-        {% endif %}
+            {% endif %}
 
 
     </div>

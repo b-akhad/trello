@@ -20,13 +20,19 @@ class Picture(models.Model):
 
 
 class Org(models.Model):
-    name = models.CharField(max_length=25)
+    name = models.CharField(max_length=25 )
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=-1)
+
+    class Meta:
+        unique_together = ('name', 'user')
 
 
 class Project(models.Model):
     name = models.CharField(max_length=25)
     org = models.ForeignKey(Org, on_delete=models.CASCADE, default=-1)
+
+    class Meta:
+        unique_together = ('name', 'org')
 
 
 class ProjectColumn(models.Model):

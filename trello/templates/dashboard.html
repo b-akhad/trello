@@ -25,9 +25,12 @@
 
 
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            {% for o in user.org_set.all %}
-                <a class="dropdown-item" href="#">{{ o.name }}</a>
-            {% endfor %}
+              {% for o in user.org_set.all %}
+                  <a class="dropdown-item" href="{% url 'dashboard' o.id %}">{{ o.name }}</a>
+              {% endfor %}
+
+
+
 
 
         </div>
@@ -47,10 +50,10 @@
             {{ user.username }}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Profile</a>
+
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item text-danger" href="{% url  'logout' %}">Log out</a>
         </div>
       </li>
 
@@ -71,28 +74,39 @@
 
 
     <div class="row align-items-start mt-1">
-        <div class="card bg-light mb-3 ml-3 mr-2" style="max-width: 18rem; width: 360px">
+        <div class="card bg-light mb-3 ml-3 mr-2" style="max-width: 19rem; width: 450px">
             <div class="card-header ">Projects</div>
                 <div style="height: 760px" class="project_div">
 
-                    <form method="POST" id="formulario">
-                        {% csrf_token %}
-                        <div id="dynamicInput[0]">
-                        <br><input  class="project_box ml-4" type="text" name="myInputs[]">
-                            <input type="button" value="+" onClick="addInput();">
-                        </div>
-                            </form>
+
+                <div class="dropdown-divider bg-dark mt-5"></div>
+                <h5 class="text-secondary text-center">Add Column</h5>
+
+                <div class="card mt-2 bg-light mb-3" style="max-width: 17rem;">
+             <div class="card-header bg-primary text-white">
+                 <form class="form-inline my-2 my-lg-0" method="post">
+            <input style="width: 230px" class="form-control mr-sm-2" type="search" placeholder="Ex: Todo" aria-label="Search">
+            <button class="btn btn-success my-2 my-sm-0" type="submit">add</button>
+                </form>
+             </div>
+
+        </div>
+
+
+
                     </div>
 
     </div>
 
-         <div class="card bg-light mb-3" style="max-width: 18rem;">
+
+        <div class="card bg-light mb-3" style="max-width: 18rem;">
              <div class="card-header bg-primary text-white">Todo</div>
                  <div class="card-body">
                     <h5 class="card-title">Light card title</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
         </div>
+
 
 </div>
 
@@ -105,21 +119,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 <script>
-var counter = 1;
-var dynamicInput = [];
 
-function addInput(){
-    var newdiv = document.createElement('div');
-    newdiv.id = dynamicInput[counter];
-    newdiv.innerHTML = "Project "  + " <br><input class='project_box ml-4' type='text' name='myInputs[]'> <input type='button' value='-' onClick='removeInput("+dynamicInput[counter]+");'>";
-    document.getElementById('formulario').appendChild(newdiv);
-    counter++;
-}
-
-  function removeInput(id){
-    var elem = document.getElementById(id);
-    return elem.parentNode.removeChild(elem);
-  }
 </script>
 </body>
 </html>

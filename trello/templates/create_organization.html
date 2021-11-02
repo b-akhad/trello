@@ -65,9 +65,16 @@
 
 <div  class="row mt-5">
     <div class="col-6 offset-3">
-
+{% if messages %}
+    <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+{% endif %}
     <form class="form-inline" method="post">
         {% csrf_token %}
+
   <div class="form-group mb-2">
     <label for="staticEmail2" class="sr-only">Name</label>
     <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="New Organization name">

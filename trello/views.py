@@ -6,6 +6,8 @@ from os.path import join
 from django.contrib.auth.models import User
 from django.conf.global_settings import MEDIA_ROOT
 from django.contrib.auth import login
+from django.contrib import messages
+from django.db import IntegrityError
 
 from django.shortcuts import render, redirect
 
@@ -16,20 +18,29 @@ from trello.models import Picture, Org
 
 
 def home(request):
+
     return render(request, 'home.html')
 
 
-def dashboard(request):
-    return render(request, "dashboard.html",)
+def dashboard(request, pk):
+    dashboard_ = Org.objects.get(pk=pk)
+    content = {"dashboard":dashboard_}
+
+    return render(request, "dashboard.html",content)
 
 
-def create_organization(request):
+def create_organization(request, pk):
     user = User.objects.get(id=request.user.id)
+
     if request.method == "POST":
-        org = Org()
-        org.name = request.POST.get("org_name")
-        org.user = user
-        org.save()
+        try:
+            org = Org()
+            org.name = request.POST.get("org_name")
+            org.user = user
+            org.save()
+        except IntegrityError :
+            messages.error(request, "This name already in use", "text-danger")
+            return render(request, "create_organization.html")
         return redirect("dashboard")
     return render(request, "create_organization.html")
 
