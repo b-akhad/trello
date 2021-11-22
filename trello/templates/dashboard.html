@@ -10,116 +10,150 @@
 </head>
 <body>
 <div class="container-fluid pr-0 pl-0 pb-0 pt-0">
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="{% url 'home' %}">Trello</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="{% url 'home' %}">Trello</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle btn btn-success pt-2 pb-2 mr-1 text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Board
-        </a>
-
-
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              {% for o in user.org_set.all %}
-                  <a class="dropdown-item" href="{% url 'dashboard' o.id %}">{{ o.name }}</a>
-              {% endfor %}
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle btn btn-success pt-2 pb-2 mr-1 text-white" href="#"
+                       id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false">
+                        Board
+                    </a>
 
 
-
-
-
-        </div>
-      </li>
-      <li class="nav-item active mr-1">
-        <a class="btn btn-success" href="{% url 'create_org' %}">New Organization +</a>
-      </li>
-      <li class="nav-item">
-        <a class="btn btn-success" href="#">Invite+</a>
-      </li>
-
-    </ul>
-      <ul class="navbar-nav">
-
-       <li class="nav-item dropdown pt-0 pb-0 mt-1 mr-3">
-        <a class="nav-link  pt-0 pb-0 mt-0   mr-1 text-white" href="#"   role="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{ user.username }}
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Profile</a>
-
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item text-danger" href="{% url  'logout' %}">Log out</a>
-        </div>
-      </li>
-
-          {% if user.picture.profile_picture %}
-          <li class="nav-item">
-              <img  style="border-radius: 50%"  width="50" height="50" src="{{ user.picture.profile_picture.url }}" alt="">
-
-            </li>
-          {% endif %}
-
-
-      </ul>
-
-
-
-  </div>
-</nav>
-
-
-    <div class="row align-items-start mt-1">
-        <div class="card bg-light mb-3 ml-3 mr-2" style="max-width: 19rem; width: 450px">
-            <div class="card-header ">Projects</div>
-                <div style="height: 760px" class="project_div">
-
-
-                <div class="dropdown-divider bg-dark mt-5"></div>
-                <h5 class="text-secondary text-center">Add Column</h5>
-
-                <div class="card mt-2 bg-light mb-3" style="max-width: 17rem;">
-             <div class="card-header bg-primary text-white">
-                 <form class="form-inline my-2 my-lg-0" method="post">
-            <input style="width: 230px" class="form-control mr-sm-2" type="search" placeholder="Ex: Todo" aria-label="Search">
-            <button class="btn btn-success my-2 my-sm-0" type="submit">add</button>
-                </form>
-             </div>
-
-        </div>
-
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% for o in user.org_set.all %}
+                            <a class="dropdown-item" href="{% url 'dashboard' o.id %}">{{ o.name }}</a>
+                        {% endfor %}
 
 
                     </div>
+                </li>
+                <li class="nav-item active mr-1">
+                    <a class="btn btn-success" href="{% url 'create_org' %}">New Organization +</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-success" href="#">Invite+</a>
+                </li>
 
-    </div>
+            </ul>
+            <ul class="navbar-nav">
+
+                <li class="nav-item dropdown pt-0 pb-0 mt-1 mr-3">
+                    <a class="nav-link  pt-0 pb-0 mt-0   mr-1 text-white" href="#" role="button" id="navbarDropdown"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ user.username }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Profile</a>
+
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger" href="{% url  'logout' %}">Log out</a>
+                    </div>
+                </li>
+
+                {% if user.picture.profile_picture %}
+                    <li class="nav-item">
+                        <img style="border-radius: 50%" width="50" height="50"
+                             src="{{ user.picture.profile_picture.url }}" alt="">
+
+                    </li>
+                {% endif %}
 
 
-        <div class="card bg-light mb-3" style="max-width: 18rem;">
-             <div class="card-header bg-primary text-white">Todo</div>
-                 <div class="card-body">
-                    <h5 class="card-title">Light card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </ul>
+
+
+        </div>
+    </nav>
+
+
+    <div  class="row align-items-start mt-1">
+        <div  class="card bg-light mb-3 ml-3 mr-2 project_div" style="max-width: 19rem; width: 450px; height: 828px;">
+
+            <div class="card-header ">Projects</div>
+            <form method="post">
+                {% csrf_token %}
+
+                    <div class="input-group mb-3">
+                        <input name="project" type="text"  class="form-control" placeholder="Project name"
+                               aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit">Button</button>
+
+                    </div>
+                    </div>
+
+
+
+            </form>
+
+
+                    <div class="row justify-content-around">
+                      {% for project in projects %}
+                          {% if project %}
+                    <button class="btn btn-secondary mt-1 ml-2 mr-2 ">{{ project.name }}</button>
+                          {% endif %}
+                    {% endfor %}
+                    </div>
+
+
+
+
+
+
+
+            <div class="dropdown-divider bg-dark mt-5"></div>
+                <h5 class="text-secondary text-center">Add Column</h5>
+
+
+
+            <div class="card mt-2 bg-light mb-3" style="max-width: 17rem;">
+                <div class="card-header bg-primary text-white">
+                    <form class="form-inline my-2 my-lg-0" method="post">
+                        <input style="width: 230px" class="form-control mr-sm-2" type="search" placeholder="Ex: Todo"
+                               aria-label="Search">
+                        <button class="btn btn-success my-2 my-sm-0" type="submit">add</button>
+                    </form>
                 </div>
+
+
+            </div>
+
+
+
         </div>
 
 
-</div>
+        <div class="card bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header bg-primary text-white">Todo</div>
+            <div class="card-body">
+                <h5 class="card-title">Light card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+            </div>
+        </div>
 
-</div>
 
+    </div>
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
-<script>
-
-</script>
 </body>
 </html>

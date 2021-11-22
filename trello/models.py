@@ -20,7 +20,7 @@ class Picture(models.Model):
 
 
 class Org(models.Model):
-    name = models.CharField(max_length=25 )
+    name = models.CharField(max_length=25)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=-1)
 
     class Meta:
@@ -28,7 +28,7 @@ class Org(models.Model):
 
 
 class Project(models.Model):
-    name = models.CharField(max_length=25)
+    name = models.CharField(max_length=25, null=True)
     org = models.ForeignKey(Org, on_delete=models.CASCADE, default=-1)
 
     class Meta:

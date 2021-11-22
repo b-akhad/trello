@@ -16,3 +16,8 @@ class UserCreation(UserCreationForm):
         widgets = {
             'username': forms.TextInput(attrs={'class': "form-control", 'placeholder': 'username'}),
         }
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(label='Username', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-control'}))

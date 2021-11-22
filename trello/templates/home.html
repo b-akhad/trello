@@ -42,7 +42,7 @@
 
 
         {% else %}
-            <a href="{% url 'login' %}" class="btn btn-secondary mr-2">Login</a>
+            <a href="{% url 'login_auth' %}" class="btn btn-secondary mr-2">Login</a>
             <a href="{% url 'register' %}" class="btn btn-success my-2 my-sm-0" type="submit">SignUp</a>
         {% endif %}
 
@@ -56,11 +56,18 @@
         <h2 class="title text-center   text-white pt-5"><i class=""> <b class="">Join</b> Us</i></h2>
         {% if user.is_authenticated %}
             <div class="text-center   pt-button-div">
+                {% if user.org %}
+
                 {% for o in user.org_set.all %}
                     <a href="{% url 'dashboard' o.id  %}" class="title-button btn btn-primary text-white">
                         {{ o.name }}
                     </a>
                 {% endfor %}
+                    {% else %}
+                    <a href="{% url 'dashboard' 1  %}" class="title-button btn btn-primary text-white">
+                        dashboard
+                    </a>
+                {% endif %}
             </div>
 
             {% else %}

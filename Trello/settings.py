@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 from os.path import join as join_path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -128,7 +129,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-LOGIN_REDIRECT_URL = 'dashboard'
+
 LOGOUT_REDIRECT_URL = '/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = join_path(BASE_DIR, 'media')
@@ -137,7 +138,7 @@ MEDIA_ROOT = join_path(BASE_DIR, 'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
-GOOGLE_RECAPTCHA_SECRET_KEY = '6LdRSRYUAAAAAOnk5yomm1dI9BmQkJWTg_wIlMJ_'
+GOOGLE_RECAPTCHA_SECRET_KEY = '6LeR30EdAAAAAI_NUaNiQhyFEX3IgSuJBdWaz7eN'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

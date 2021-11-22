@@ -13,35 +13,40 @@ from django.shortcuts import render, redirect
 
 from Trello import settings
 from account.forms import UserCreation
-from trello.models import Picture, Org
+from trello.models import Picture, Org, Project
+
 # Create your views here.
 
 
 def home(request):
-
     return render(request, 'home.html')
 
 
 def dashboard(request, pk):
     dashboard_ = Org.objects.get(pk=pk)
-    content = {"dashboard":dashboard_}
+    projects = Project.objects.filter(org_id=dashboard_)
 
+    if request.method == 'POST':
+        project = Project()
+        project.name = request.POST.get('project')
+        project.org = dashboard_
+        project.save()
+    content = {"dashboard":dashboard_, 'projects':projects}
     return render(request, "dashboard.html",content)
 
 
-def create_organization(request, pk):
-    user = User.objects.get(id=request.user.id)
-
+def create_organization(request):
+    user = User.objects.get(pk=request.user.id)
     if request.method == "POST":
         try:
             org = Org()
             org.name = request.POST.get("org_name")
             org.user = user
             org.save()
-        except IntegrityError :
-            messages.error(request, "This name already in use", "text-danger")
+        except IntegrityError as e:
+            messages.error(request, f"{e}")
             return render(request, "create_organization.html")
-        return redirect("dashboard")
+        return dashboard(request, pk=org.id - 1)
     return render(request, "create_organization.html")
 
 
@@ -59,17 +64,21 @@ def registration(request):
             }
             r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
             result = r.json()
+            if result['success']:
+                user = form.save()
 
-            user = form.save()
-
-            picture = Picture()
-            picture.profile_picture = request.FILES.get('file')
-            picture.user = user
-            picture.save()
-            login(request, user)
-            return redirect('home')
-    context = {"form": form}
-    return render(request, 'register.html', context)
+                picture = Picture()
+                picture.profile_picture = request.FILES.get('file')
+                picture.user = user
+                picture.save()
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.error(request, "Bot cannot register for this site")
+                return render(request, 'register.html')
+        context = {"form": form}
+        return render(request, 'register.html', context)
+    return render(request, 'register.html', {"form":form})
 
 
 def profile(request, pk):
